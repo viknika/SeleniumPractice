@@ -185,7 +185,7 @@ public class FirstSeleniumTest
         driver.findElement(By.xpath("//*[text()='"+ yearInput + "']")).click();
 
         String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
-        assertEquals(yearInput, yearValue);;
+        assertEquals(yearInput, yearValue);
 
     }
 
