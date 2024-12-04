@@ -106,6 +106,13 @@ public class FirstSeleniumTest
     @Test
     public void genderTest() throws InterruptedException {
         String femaleXpath = "//*[@name='sex' and @value=1]";
+
+        // parent-siblings xpath:
+        //$x("//*[text()='Female']//following-sibling::*[@type='radio']");
+
+        // siblings-parent xpath:
+        //$x("//input[@type='radio']//preceding-sibling::*[text()='Female']")
+
         String maleXpath = "//*[@name='sex' and @value=2]";
 
         driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
@@ -154,6 +161,11 @@ public class FirstSeleniumTest
         assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
         Thread.sleep(1000);
 
+
+        //descendant xpath , parent-descendant
+        //$x("//*[@data-name='birthday_wrapper']//descendant::*[@id='year']")
+        // ancestor-parent
+        //$x("//*[@id='year']//ancestor::*[@data-name='birthday_wrapper']")
         driver.findElement(By.xpath("//*[@title='Year']")).click();
         driver.findElement(By.xpath("//*[text()='1990']")).click();
 
