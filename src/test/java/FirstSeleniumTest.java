@@ -2,6 +2,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,6 +69,7 @@ public class FirstSeleniumTest
         WebElement loginButtonElement = driver.findElement(By.xpath("//button[@type='submit']"));
         assertNotNull(loginButtonElement);
 
+
         WebElement forgotPassElement = driver.findElement(By.xpath("//a[text()='Forgot password?']"));
         assertNotNull(forgotPassElement);
         WebElement createNewAccButton = driver.findElement(By.xpath("//*[text()='Create new account']"));
@@ -92,5 +95,87 @@ public class FirstSeleniumTest
         assertNotNull(loginButtonElement);
         loginButtonElement.click();
     }
+
+    @Test
+    public void signupTest()
+    {
+        driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
+        assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
+    }
+
+    @Test
+    public void genderTest() throws InterruptedException {
+        String femaleXpath = "//*[@name='sex' and @value=1]";
+        String maleXpath = "//*[@name='sex' and @value=2]";
+
+        driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
+        assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
+
+        Thread.sleep(1000);
+
+        // verify female gender is checked
+        WebElement femaleButton = driver.findElement(By.xpath(femaleXpath));
+        femaleButton.click();
+        String isFemaleChecked = driver.findElement(By.xpath(femaleXpath)).getAttribute("checked");
+        assertNotNull(isFemaleChecked);
+        assertEquals("true", isFemaleChecked);
+
+        // verify male gender is checked
+        WebElement maleButton = driver.findElement(By.xpath(maleXpath));
+        maleButton.click();
+        String isMaleChecked = driver.findElement(By.xpath(maleXpath)).getAttribute("checked");
+        assertNotNull(isMaleChecked);
+        assertEquals("true", isMaleChecked);
+    }
+
+    @Test
+    public void errorMessageTest() throws InterruptedException {
+
+        driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
+        assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
+
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//button[@name='websubmit']")).click();
+
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//input[@name='reg_email__']")).click();
+        //driver.findElement(By.xpath("//*[contains(text(),'Mobile number or')]")).click();
+
+        WebElement error = driver.findElement(By.xpath("//*[contains(text(), 'to reset')]"));
+        assertNotNull(error);
+
+    }
+
+    @Test
+    public void yearOfBirthTest() throws InterruptedException {
+        driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
+        assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//*[@title='Year']")).click();
+        driver.findElement(By.xpath("//*[text()='1990']")).click();
+
+        String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
+        assertEquals("1990", yearValue);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1905","1950", "2020", "2024"})
+    public void yearOfBirthTestParametrized(String yearInput) throws InterruptedException {
+        driver.findElement(By.xpath("//*[text()= 'Create new account']")).click();
+        assertNotNull(driver.findElement(By.xpath("//*[text()='Sign Up']")));
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//*[@title='Year']")).click();
+        driver.findElement(By.xpath("//*[text()='"+ yearInput + "']")).click();
+
+        String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
+        assertEquals(yearInput, yearValue);
+
+    }
+
 
 }
