@@ -7,7 +7,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
@@ -210,6 +209,28 @@ public class FirstSeleniumTest
             System.out.println("Something went wrong");
         }
     }
+
+    public void smallPause()
+    {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
+    }
+
+    public void largePause()
+    {
+        try {
+            Thread.sleep(10000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
+    }
+
+
 
 
 }
