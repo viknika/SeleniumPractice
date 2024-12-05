@@ -195,9 +195,20 @@ public class FirstSeleniumTest
     public void actionTest()
     {
         driver.get("https://daviktapes.com/");
+        pause();
         WebElement element = driver.findElement(By.xpath("//a[text()='Company']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
+    }
+
+    public void pause()
+    {
+        try {
+            Thread.sleep(5000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
     }
 
 
