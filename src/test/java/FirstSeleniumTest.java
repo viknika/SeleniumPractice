@@ -195,21 +195,7 @@ public class FirstSeleniumTest
 
     }
 
-    @Test
-    public void actionTest()
-    {
-        driver.get("https://daviktapes.com/");
-       // pause();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Company']")));
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//a[text()='Company']")));
-
-
-        WebElement element = driver.findElement(By.xpath("//a[text()='Company']"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).build().perform();
-    }
 
     public void pause()
     {
