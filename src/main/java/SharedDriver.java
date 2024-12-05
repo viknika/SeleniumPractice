@@ -12,6 +12,7 @@ public class SharedDriver
             WebDriverManager.chromedriver().setup();
             //System.setProperty("webdriver.chrome.driver","C:/Users/Veronika/Downloads/chromedriver-win64/chromedriver-win64/chromedriver.exe");
             webDriver = new ChromeDriver();
+            webDriver.manage().window().maximize();
         }
         return webDriver;
     }
