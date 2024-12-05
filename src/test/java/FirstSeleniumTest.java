@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -187,6 +189,15 @@ public class FirstSeleniumTest
         String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
         assertEquals(yearInput, yearValue);
 
+    }
+
+    @Test
+    public void actionTest()
+    {
+        driver.get("https://daviktapes.com/");
+        WebElement element = driver.findElement(By.xpath("//a[text()='Company']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).build().perform();
     }
 
 
