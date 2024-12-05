@@ -7,10 +7,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -191,14 +195,39 @@ public class FirstSeleniumTest
 
     }
 
-    @Test
-    public void actionTest()
+
+
+    public void pause()
     {
-        driver.get("https://daviktapes.com/");
-        WebElement element = driver.findElement(By.xpath("//a[text()='Company']"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).build().perform();
+        try {
+            Thread.sleep(5000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
     }
+
+    public void smallPause()
+    {
+        try {
+            Thread.sleep(1000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
+    }
+
+    public void largePause()
+    {
+        try {
+            Thread.sleep(10000);
+        } catch (Exception err)
+        {
+            System.out.println("Something went wrong");
+        }
+    }
+
+
 
 
 }
