@@ -8,8 +8,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -194,7 +199,13 @@ public class FirstSeleniumTest
     public void actionTest()
     {
         driver.get("https://daviktapes.com/");
-        pause();
+       // pause();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Company']")));
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//a[text()='Company']")));
+
+
         WebElement element = driver.findElement(By.xpath("//a[text()='Company']"));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
