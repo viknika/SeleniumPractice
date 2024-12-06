@@ -62,7 +62,10 @@ public class DavikTest
     public void waitAndClickTest()
     {
         WebDriverWait wait = new WebDriverWait(driver, Duration.of(5, ChronoUnit.SECONDS));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Company']"))).click();
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Company']"))).click();
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Company']"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[text()='Company']"))).click();
+
         pause();
     }
 
