@@ -4,16 +4,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.Year;
-import java.time.YearMonth;
-import java.util.stream.Stream;
 
+import java.time.Month;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class FacebookSignupPageTest
@@ -69,12 +68,12 @@ public class FacebookSignupPageTest
 
         //DOB error message
         driver.findElement(By.xpath("//div[@id='birthday_wrapper']//i[@class='_5dbc _5k_6 img sp_98fCI7IVTTz sx_54513f']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         assertNotNull(driver.findElement(By.xpath("//*[contains(text(), 'real birthday')]")));
 
         //Gender error message
         driver.findElement(By.xpath("//i[@class='_5dbc _8esb img sp_98fCI7IVTTz sx_54513f']")).click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         assertNotNull(driver.findElement(By.xpath("//*[contains(text(), 'choose a gender')]")));
 
 
@@ -86,6 +85,23 @@ public class FacebookSignupPageTest
         //Password empty field error message
         driver.findElement(By.xpath("//input[@name='reg_passwd__']")).click();
         assertNotNull(driver.findElement(By.xpath("//*[contains(text(), 'combination of at least')]")));
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Jan", "Feb", "Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"})
+    public void monthDropListTest(String monthInput)
+    {
+        setupPage();
+
+        driver.findElement(By.xpath("//select[@name='birthday_month']")).click();
+        driver.findElement(By.xpath("//*[text()='"+ monthInput + "']")).click();
+        String monthValue = driver.findElement(By.xpath("//*[@title='Month']//option[contains(text(),'"+ monthInput +"')]")).getText();
+        assertEquals(monthInput, monthValue);
+
+
+
+
 
 
     }
