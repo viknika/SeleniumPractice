@@ -132,4 +132,52 @@ public class FacebookSignupPageTest
     }
 
 
+
+    @Test
+    public void termsLinkTest()
+    {
+        setupPage();
+
+        String expectedTermsUrl = "https://www.facebook.com/legal/terms/update";
+
+        driver.findElement(By.xpath("//a[@id='terms-link']")).click();
+        for(String str : driver.getWindowHandles()) {
+            driver.switchTo().window(str);
+        }
+        String currentUrl = driver.getCurrentUrl();
+        assertEquals(expectedTermsUrl, currentUrl);
+    }
+    @Test
+    public void dataPolicyLinkTest()
+    {
+        setupPage();
+
+        String expectedPolicyUrl = "https://www.facebook.com/privacy/policy/?entry_point=data_policy_redirect&entry=0";
+
+        driver.findElement(By.xpath("//a[@id='privacy-link']")).click();
+        for(String str : driver.getWindowHandles()) {
+            driver.switchTo().window(str);
+        }
+        String currentUrl = driver.getCurrentUrl();
+        assertEquals(expectedPolicyUrl, currentUrl);
+
+    }
+
+    @Test
+    public void cookiesPolicyLinkTest()
+    {
+        setupPage();
+
+       String expectedPolicyUrl = "https://www.facebook.com/privacy/policies/cookies/?entry_point=cookie_policy_redirect&entry=0";
+
+        driver.findElement(By.xpath("//a[@id='cookie-use-link']")).click();
+        for(String str : driver.getWindowHandles()) {
+            driver.switchTo().window(str);
+        }
+        String currentUrl = driver.getCurrentUrl();
+        assertEquals(expectedPolicyUrl, currentUrl);
+
+    }
+
+
 }
