@@ -12,8 +12,7 @@ import org.openqa.selenium.WebElement;
 
 import java.time.Month;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FacebookSignupPageTest
 {
@@ -112,6 +111,23 @@ public class FacebookSignupPageTest
         String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
         assertEquals(yearInput,yearValue);
 
+    }
+
+    @Test
+    public void genderRadioButtonsTest() throws InterruptedException {
+        setupPage();
+
+        driver.findElement(By.xpath("//*[text()='Female']//input[@type='radio']")).click();
+        Thread.sleep(2000);
+        assertTrue(driver.findElement(By.xpath("//*[text()='Female']//input[@type='radio']")).isSelected());
+
+        driver.findElement(By.xpath("//*[text()='Male']//input[@type='radio']")).click();
+        Thread.sleep(2000);
+        assertTrue(driver.findElement(By.xpath("//*[text()='Male']//input[@type='radio']")).isSelected());
+
+        driver.findElement(By.xpath("//*[text()='Custom']//input[@type='radio']")).click();
+        Thread.sleep(2000);
+        assertTrue(driver.findElement(By.xpath("//*[text()='Custom']//input[@type='radio']")).isSelected());
 
     }
 
