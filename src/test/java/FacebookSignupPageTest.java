@@ -98,10 +98,19 @@ public class FacebookSignupPageTest
         driver.findElement(By.xpath("//*[text()='"+ monthInput + "']")).click();
         String monthValue = driver.findElement(By.xpath("//*[@title='Month']//option[contains(text(),'"+ monthInput +"')]")).getText();
         assertEquals(monthInput, monthValue);
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"1905", "1950", "2020", "2024"})
+    public void yearDropListTest(String yearInput)
+    {
+        setupPage();
 
+        driver.findElement(By.xpath("//select[@name='birthday_year']")).click();
+        driver.findElement(By.xpath("//*[text()='"+ yearInput + "']")).click();
 
-
+        String yearValue = driver.findElement(By.xpath("//*[@title='Year']")).getAttribute("value");
+        assertEquals(yearInput,yearValue);
 
 
     }
